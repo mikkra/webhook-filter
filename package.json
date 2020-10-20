@@ -1,7 +1,7 @@
 {
-	"name": "discord.js-webhook-filter",
-	"version": "0.1.0",
-	"description": "Filters events based on repo/branch from GitHub webhooks",
+	"name": "github-webhook-filter",
+	"version": "1.0.0",
+	"description": "Filters events based on whitelisted repo/branch from GitHub webhooks",
 	"license": "Apache-2.0",
 	"author": "Schuyler Cebulskie <Gawdl3y@gawdl3y.com> (https://gawdl3y.com/)",
 	"repository": {
@@ -17,6 +17,7 @@
 		"github"
 	],
 	"scripts": {
+		"start": "node index.js",
 		"test": "npm run lint",
 		"lint": "eslint index.js",
 		"lint:fix": "eslint --fix index.js"

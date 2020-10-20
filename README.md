@@ -9,11 +9,12 @@ The blacklist contains repo names and their corresponding blacklisted branches w
 ### Example
 ```json
 {
-	"secret": "This is a secret.",
-	"webhook": "https://some-webhook.site/webhook",
-	"blacklist": {
-		"someone/some-repo": ["some-branch", "some-other-branch"],
-		"someone/cooler-repo": ["any/.*"]
-	}
+  "rules": {
+    "mikkra/vk-liker": {
+      "secret": "some secret",
+      "webhook": "https://some_webhook.site/hook",
+      "branches": ["master", "dev"]
+    }
+  }
 }
 ```
