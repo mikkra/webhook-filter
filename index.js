@@ -1,4 +1,4 @@
-/* eslint-disable indent-legacy */
+/* eslint-disable indent-legacy, no-process-env */
 const fs = require('fs');
 const crypto = require('crypto');
 const http = require('http');
@@ -6,7 +6,12 @@ const bl = require('bl');
 const snekfetch = require('snekfetch');
 
 // Load config and build list of refs to block
-const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+const config = JSON.parse(process.env.JSON_CONFIG || fs.readFileSync('./config.json', 'utf8') || '{}');
+const PORT = process.env.PORT || 1337;
+if(Object.keys(config).length < 1) {
+	console.error('Can\'t read config file. Provide JSON_CONFIG env or config.json file.');
+	return;
+}
 const refs = {};
 for(const [repo, options] of Object.entries(config.rules)) {
   refs[repo] = options;
@@ -90,9 +95,9 @@ http.createServer((req, res) => {
     res.writeHead(500, { 'Content-type': 'application/json' });
     res.end(JSON.stringify({ error: "Can't read json payload or target ref" }));
   }));
-}).listen(80, err => {
+}).listen(PORT, err => {
   if(err) console.error('Error starting HTTP server:', err);
-  else console.log('Listening on port 1337.');
+  else console.log(`Listening on port ${PORT}.`);
 });
 
 process.on('unhandledRejection', err => {
